@@ -39,15 +39,11 @@ BIN_DIR = bin
 
 # LISTING 1.1 - main.c (requiere librería de 1.3)
 # Archivos fuente del listing 1.1 + dependencias de otros listings
-LISTING_1_1_SOURCES = $(SRC_DIR)/capitulo1/1.1/main.c
+LISTING_1_1_SOURCES = $(SRC_DIR)/capitulo1/1.1/main.c $(SRC_DIR)/capitulo1/1.3/reciprocal.hpp
 # Nombre del ejecutable
 LISTING_1_1_TARGET = main
 # Tipo de compilador (CXX porque incluye archivos .cpp)
 LISTING_1_1_COMPILER = CC
-# Incluir la carpeta donde está reciprocal.hpp
-LISTING_1_1_INCLUDES = -I$(SRC_DIR)/capitulo1/1.3
-# Enlazar con el objeto compilado de 1.2
-LISTING_1_1_LINK_WITH = $(BIN_DIR)/capitulo1/1.2/reciprocal.o
 
 # LISTING 1.2 - reciproco.cpp (requiere librería de 1.3) 
 # Archivos fuente del listing 1.2 + dependencias de otros listings
@@ -56,12 +52,13 @@ LISTING_1_2_SOURCES = $(SRC_DIR)/capitulo1/1.2/reciprocal.cpp $(SRC_DIR)/capitul
 LISTING_1_2_TARGET = reciprocal
 # Tipo de compilador
 LISTING_1_2_COMPILER = CXX
-# Incluir la carpeta donde está reciprocal.hpp
-LISTING_1_1_INCLUDES = -I$(SRC_DIR)/capitulo1/1.3
 
-
-# LISTING 1.3 - Solo header (reciprocal.hpp). No executable por defecto.
-# (No definir LISTING_1_3_SOURCES si sólo es header-only)
+# LISTING 1.3 - Solo librería (reciproco.hpp + implementación)
+LISTING_1_3_SOURCES = $(BIN_DIR)/capitulo1/1.1/main.o $(BIN_DIR)/capitulo1/1.2/reciprocal.o
+# Nombre del ejecutable
+LISTING_1_3_TARGET = reciprocal
+# Tipo de compilador
+LISTING_1_3_COMPILER = CXX
 
 
 # -----------------------------------------------------------------------------
@@ -105,21 +102,15 @@ define make_listing_rule
 ifdef LISTING_$(1)_$(2)_SOURCES
 
 # Determinar objetos intermedios (.o) basados en archivos fuente
-# Fuentes en SRC_DIR/*.c o SRC_DIR/*.cpp -> BIN_DIR/*.o
-LISTING_$(1)_$(2)_OBJECTS = $$(patsubst $(SRC_DIR)/%.c,$(BIN_DIR)/%.o,$$(patsubst $(SRC_DIR)/%.cpp,$(BIN_DIR)/%.o,$$(LISTING_$(1)_$(2)_SOURCES)))
-# Si el usuario pasó ya objetos en BIN_DIR/*.o en LISTING_..._SOURCES, añádelos tal cual
-LISTING_$(1)_$(2)_OBJECTS := $$(filter %.o,$$(LISTING_$(1)_$(2)_OBJECTS) $$(LISTING_$(1)_$(2)_SOURCES))
+LISTING_$(1)_$(2)_OBJECTS = \
+  $$(patsubst $(SRC_DIR)/%.c,$(BIN_DIR)/%.o,$$(filter %.c,$$(LISTING_$(1)_$(2)_SOURCES))) \
+  $$(patsubst $(SRC_DIR)/%.cpp,$(BIN_DIR)/%.o,$$(filter %.cpp,$$(LISTING_$(1)_$(2)_SOURCES)))
+
+# Otros dependencias (headers, .o precompilados, etc.) — no se convierten a .o
+LISTING_$(1)_$(2)_OTHER_DEPS = $$(filter-out %.c %.cpp,$$(LISTING_$(1)_$(2)_SOURCES))
 
 # Path completo del ejecutable final
 LISTING_$(1)_$(2)_FULL_TARGET = $(BIN_DIR)/capitulo$(1)/$$(LISTING_$(1)_$(2)_TARGET)
-
-# Variables opcionales por listing (pueden quedar vacías si no se usan)
-LISTING_$(1)_$(2)_INCLUDES ?=
-LISTING_$(1)_$(2)_LINK_WITH ?=
-LISTING_$(1)_$(2)_LDFLAGS ?=
-
-# Asegurar que la compilación de los objetos de este listing reciba los includes
-$$(LISTING_$(1)_$(2)_OBJECTS): CPPFLAGS += $$(LISTING_$(1)_$(2)_INCLUDES)
 
 # Agregar a la lista de todos los targets
 ALL_TARGETS += $$(LISTING_$(1)_$(2)_FULL_TARGET)
@@ -131,10 +122,9 @@ listing-$(1).$(2): $$(LISTING_$(1)_$(2)_FULL_TARGET)
 
 # Regla para enlazar el ejecutable final
 $$(LISTING_$(1)_$(2)_FULL_TARGET): $$(LISTING_$(1)_$(2)_OBJECTS)
-    @echo "Enlazando listing $(1).$(2)..."
-    @mkdir -p $$(dir $$@)
-    @$$(if $$(filter CXX,$$(LISTING_$(1)_$(2)_COMPILER)),$$(CXX),$$(CC)) $$^ $$(LISTING_$(1)_$(2)_LINK_WITH) -o $$@ $$(LDFLAGS) $$(LISTING_$(1)_$(2)_LDFLAGS)
-    @echo "✓ Enlazado completado: $$@"
+	@echo "Enlazando listing $(1).$(2)..."
+	@mkdir -p $$(dir $$@)
+	@$$(if $$(filter CXX,$$(LISTING_$(1)_$(2)_COMPILER)),$$(CXX),$$(CC)) $$^ -o $$@ $$(LDFLAGS)
 
 endif
 
@@ -161,15 +151,15 @@ $(eval $(call make_listing_rule,1,3))  # listing-1.3
 
 # Regla para compilar archivos .c a archivos .o
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
-    @echo "Compilando (C): $<"
-    @mkdir -p $(dir $@)
-    $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@echo "Compilando (C): $<"
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Regla para compilar archivos .cpp a archivos .o  
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp
-    @echo "Compilando (C++): $<"
-    @mkdir -p $(dir $@)
-    $(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
+	@echo "Compilando (C++): $<"
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # =============================================================================
 # TARGETS PRINCIPALES REQUERIDOS POR EL TRABAJO PRÁCTICO
