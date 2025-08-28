@@ -38,18 +38,18 @@ LISTING_1_2_COMPILER = CXX
 
 # LINK LISTING  1.1 y 1.2
 LINK_OBJECTS = $(BIN_DIR)/capitulo1/1.1/main.o $(BIN_DIR)/capitulo1/1.2/reciprocal.o
-# Ejecutable del programa completo
 LINK_EXECUTABLE = $(BIN_DIR)/capitulo1/reciprocal
 
 .PHONY: listing-LINK-1.1-1.2
 listing-LINK-1.1-1.2: $(LINK_EXECUTABLE)
 
 $(LINK_EXECUTABLE): $(LINK_OBJECTS)
-	@echo "Enlazando programa completo (manual)..."
+	@echo "Enlazando main.o y reciprocal.o ..."
 	@echo "Archivos objeto: $(LINK_OBJECTS)"
 	@mkdir -p $(dir $@)
 	$(CXX) $^ -o $@ $(LDFLAGS)
 	@echo "✓ Programa completo compilado exitosamente -> $@"
+	@echo "========================================="
 
 # =============================================================================
 # ==========================CAPITULO 2=========================================
@@ -84,7 +84,7 @@ $$(LISTING_$(1)_$(2)_FULL_TARGET): $$(LISTING_$(1)_$(2)_OBJECTS)
 	@echo "Compilando listing $(1).$(2)..."
 	@mkdir -p $$(dir $$@)
 	@echo "Listing $(1).$(2) compilado exitosamente -> $$@"
-
+	@echo "========================================="
 endif
 
 endef
@@ -117,6 +117,7 @@ $(LISTING_$(1)_FULL_TARGET): $(LISTING_$(1)_OBJECTS)
 	@mkdir -p $(dir $@)
 	@$(if $(filter CXX,$(LISTING_$(1)_COMPILER)),$(CXX),$(CC)) $^ -o $@ $(LDFLAGS)
 	@echo "Listing $(1) compilado y enlazado exitosamente -> $@"
+	@echo "========================================="
 
 endif
 
@@ -137,12 +138,14 @@ $(eval $(call make_listing_rule,1,2))
 
 # Regla para compilar archivos .c a archivos .o
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
+	@echo "========================================="
 	@echo "Compilando (C): $<"
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Regla para compilar archivos .cpp a archivos .o  
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@echo "========================================="
 	@echo "Compilando (C++): $<"
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
@@ -162,30 +165,23 @@ all: $(ALL_TARGETS)
 
 .PHONY: clean
 clean:
+	@echo "========================================="
 	@echo "Limpiando archivos compilados..."
 	@rm -rf $(BIN_DIR)/*/*
 	@echo "Limpieza completada"
+	@echo "========================================="
 
 
 # =============================================================================
 
-.PHONY: info
-info:
+.PHONY: help  
+help: 
 	@echo "========================================="
-	@echo "INFORMACIÓN DEL PROYECTO TP-LISTINGS"
-	@echo "========================================="
-	@echo "Estructura:"
-	@echo "  $(SRC_DIR)/ - Código fuente por capítulos"  
-	@echo "  $(BIN_DIR)/ - Ejecutables compilados"
-	@echo ""
-	@echo "COMANDOS PRINCIPALES (Requeridos por el TP):"
+	@echo "  make listing-X.Y   - Compila listing específico"
 	@echo "  make all           - Compila todos los programas"
 	@echo "  make clean         - Elimina compilaciones"
-	@echo "  make listing-X.Y   - Compila listing específico"
-
-
-.PHONY: help  
-help: info
+	@echo "  make help         - Muestra esta ayuda"
+	@echo "========================================="
 
 # =============================================================================
 
