@@ -99,10 +99,65 @@ LISTING_2_9_TARGET = $(BIN_DIR)/capitulo2/tifftest
 LISTING_2_9_LIBS = -ltiff
 
 # =============================================================================
+# ==========================CAPITULO 3=========================================
+
+# LISTING 3.1
+LISTING_3_1_SOURCES = $(SRC_DIR)/capitulo3/3.1/print-pid.c
+LISTING_3_1_TARGET = print-pid
+LISTING_3_1_COMPILER = CC
+LISTING_3_1_TYPE = EXECUTABLE
+
+# LISTING 3.2
+LISTING_3_2_SOURCES = $(SRC_DIR)/capitulo3/3.2/system.c
+LISTING_3_2_TARGET = system
+LISTING_3_2_COMPILER = CC
+LISTING_3_2_TYPE = EXECUTABLE
+
+# LISTING 3.3
+LISTING_3_3_SOURCES = $(SRC_DIR)/capitulo3/3.3/fork.c
+LISTING_3_3_TARGET = fork
+LISTING_3_3_COMPILER = CC
+LISTING_3_3_TYPE = EXECUTABLE
+
+# LISTING 3.4
+LISTING_3_4_SOURCES = $(SRC_DIR)/capitulo3/3.4/fork-exec.c
+LISTING_3_4_TARGET = fork-exec
+LISTING_3_4_COMPILER = CC
+LISTING_3_4_TYPE = EXECUTABLE
+
+# LISTING 3.5
+LISTING_3_5_SOURCES = $(SRC_DIR)/capitulo3/3.5/sigusr1.c
+LISTING_3_5_TARGET = sigusr1
+LISTING_3_5_COMPILER = CC
+LISTING_3_5_TYPE = EXECUTABLE
+
+# LISTING 3.6
+LISTING_3_6_SOURCES = $(SRC_DIR)/capitulo3/3.6/zombie.c
+LISTING_3_6_TARGET = make-zombie
+LISTING_3_6_COMPILER = CC
+LISTING_3_6_TYPE = EXECUTABLE
+
+# LISTING 3.7
+LISTING_3_7_SOURCES = $(SRC_DIR)/capitulo3/3.7/sigchld.c
+LISTING_3_7_TARGET = sigchld
+LISTING_3_7_COMPILER = CC
+LISTING_3_7_TYPE = EXECUTABLE
+
+# =============================================================================
+# ==========================CAPITULO 4=========================================
+
+
+
+# =============================================================================
 
 ALL_TARGETS := listing-1.1 listing-1.2 listing-1.LINK-1.1-1.2 listing-2.1 
 ALL_TARGETS += listing-2.2 listing-2.3 listing-2.4 listing-2.5 listing-2.6
-ALL_TARGETS += listing-2.7 listing-2.8
+ALL_TARGETS += listing-2.7 listing-2.8 listing-2.9 listing-3.1 listing-3.2
+ALL_TARGETS += listing-3.3 listing-3.4 listing-3.5 listing-3.6 listing-3.7
+ALL_TARGETS += listing-4.1 listing-4.2 listing-4.3 listing-4.4 listing-4.5
+ALL_TARGETS += listing-4.6 listing-4.7 listing-4.8 listing-4.9 listing-4.10
+ALL_TARGETS += listing-4.11 listing-4.12 listing-4.13 listing-4.14
+ALL_TARGETS += listing-4.15 listing-5.1
 
 # =============================================================================
 
@@ -253,6 +308,30 @@ $(LISTING_2_9_TARGET): $(LISTING_2_9_SOURCES)
 	$(CC) -o $@ $^ $(LISTING_2_9_LIBS)
 	@echo "Ejecutable creado exitosamente -> $@"
 	@echo "========================================="
+
+# ===================================
+# CAPITULO 3
+# ===================================
+# Listing 3.1
+$(eval $(call make_listing_rule,3,1))
+# Listing 3.2
+$(eval $(call make_listing_rule,3,2))
+# Listing 3.3
+$(eval $(call make_listing_rule,3,3))
+# Listing 3.4
+$(eval $(call make_listing_rule,3,4))
+# Listing 3.5
+$(eval $(call make_listing_rule,3,5))
+# Listing 3.6
+$(eval $(call make_listing_rule,3,6))
+# Listing 3.7
+$(eval $(call make_listing_rule,3,7))
+# Listing 3.8
+$(eval $(call make_listing_rule,3,8))
+# Listing 3.9
+$(eval $(call make_listing_rule,3,9))
+# Listing 3.10
+$(eval $(call make_listing_rule,3,10))
 
 # =============================================================================
 
