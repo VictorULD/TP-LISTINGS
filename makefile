@@ -20,6 +20,7 @@ BIN_DIR = bin
 # Directorios de headers (opcional)
 # Nombre del ejecutable
 # Tipo de compilador
+# Librerías que se van a enlazar
 # Tipo de salida: OBJECT (solo .o) o EXECUTABLE (ejecutable)
 # =============================================================================
 # =========================CAPITULO 1=========================================
@@ -145,6 +146,114 @@ LISTING_3_7_TYPE = EXECUTABLE
 
 # =============================================================================
 # ==========================CAPITULO 4=========================================
+
+# LISTING 4.1
+LISTING_4_1_SOURCES = $(SRC_DIR)/capitulo4/4.1/thread-create.c
+LISTING_4_1_TARGET = thread-create
+LISTING_4_1_COMPILER = CC
+LISTING_4_1_LIBS = -lpthread
+LISTING_4_1_TYPE = EXECUTABLE
+
+# LISTING 4.2
+LISTING_4_2_SOURCES = $(SRC_DIR)/capitulo4/4.2/thread-create2.c
+LISTING_4_2_TARGET = thread-create2
+LISTING_4_2_COMPILER = CC
+LISTING_4_2_LIBS = -lpthread
+LISTING_4_2_TYPE = EXECUTABLE
+
+# LISTING 4.3
+LISTING_4_3_SOURCES = $(SRC_DIR)/capitulo4/4.3/thread-create2.c
+LISTING_4_3_TARGET = thread-create3
+LISTING_4_3_COMPILER = CC
+LISTING_4_3_LIBS = -lpthread
+LISTING_4_3_TYPE = EXECUTABLE
+
+# LISTING 4.4
+LISTING_4_4_SOURCES = $(SRC_DIR)/capitulo4/4.4/primes.c
+LISTING_4_4_TARGET = primes
+LISTING_4_4_COMPILER = CC
+LISTING_4_4_LIBS = -lpthread
+LISTING_4_4_TYPE = EXECUTABLE
+
+# LISTING 4.5
+LISTING_4_5_SOURCES = $(SRC_DIR)/capitulo4/4.5/detached.c
+LISTING_4_5_TARGET = detached
+LISTING_4_5_COMPILER = CC
+LISTING_4_5_LIBS = -lpthread
+LISTING_4_5_TYPE = EXECUTABLE
+
+# LISTING 4.6
+LISTING_4_6_SOURCES = $(SRC_DIR)/capitulo4/4.6/critical-section.c
+LISTING_4_6_TARGET = critical-section
+LISTING_4_6_COMPILER = CC
+LISTING_4_6_LIBS = -lpthread
+LISTING_4_6_TYPE = EXECUTABLE
+
+# LISTING 4.7
+LISTING_4_7_SOURCES = $(SRC_DIR)/capitulo4/4.7/tsd.c
+LISTING_4_7_TARGET = tsd
+LISTING_4_7_COMPILER = CC
+LISTING_4_7_LIBS = -lpthread
+LISTING_4_7_TYPE = EXECUTABLE
+
+# LISTING 4.8
+LISTING_4_8_SOURCES = $(SRC_DIR)/capitulo4/4.8/cleanup.c
+LISTING_4_8_TARGET = cleanup
+LISTING_4_8_COMPILER = CC
+LISTING_4_8_LIBS = -lpthread
+LISTING_4_8_TYPE = EXECUTABLE
+
+# LISTING 4.9
+LISTING_4_9_SOURCES = $(SRC_DIR)/capitulo4/4.9/cxx-exit.cpp
+LISTING_4_9_TARGET = cxx-exit
+LISTING_4_9_COMPILER = CXX
+LISTING_4_9_LIBS = -lpthread
+LISTING_4_9_TYPE = EXECUTABLE
+
+# LISTING 4.10
+LISTING_4_10_SOURCES = $(SRC_DIR)/capitulo4/4.10/job-queue1.c
+LISTING_4_10_TARGET = job-queue1
+LISTING_4_10_COMPILER = CC
+LISTING_4_10_LIBS = -lpthread
+LISTING_4_10_TYPE = EXECUTABLE
+
+# LISTING 4.11
+LISTING_4_11_SOURCES = $(SRC_DIR)/capitulo4/4.11/job-queue2.c
+LISTING_4_11_TARGET = job-queue2
+LISTING_4_11_COMPILER = CC
+LISTING_4_11_LIBS = -lpthread
+LISTING_4_11_TYPE = EXECUTABLE
+
+# LISTING 4.12
+LISTING_4_12_SOURCES = $(SRC_DIR)/capitulo4/4.12/job-queue3.c
+LISTING_4_12_TARGET = job-queue3
+LISTING_4_12_COMPILER = CC
+LISTING_4_12_LIBS = -lpthread
+LISTING_4_12_TYPE = EXECUTABLE
+
+# LISTING 4.13
+LISTING_4_13_SOURCES = $(SRC_DIR)/capitulo4/4.13/spin-condvar.c
+LISTING_4_13_TARGET = spin-condvar
+LISTING_4_13_COMPILER = CC
+LISTING_4_13_LIBS = -lpthread
+LISTING_4_13_TYPE = EXECUTABLE
+
+# LISTING 4.14
+LISTING_4_14_SOURCES = $(SRC_DIR)/capitulo4/4.14/condvar.c
+LISTING_4_14_TARGET = condvar
+LISTING_4_14_COMPILER = CC
+LISTING_4_14_LIBS = -lpthread
+LISTING_4_14_TYPE = EXECUTABLE
+
+# LISTING 4.15
+LISTING_4_15_SOURCES = $(SRC_DIR)/capitulo4/4.15/thread-pid.c
+LISTING_4_15_TARGET = thread-pid
+LISTING_4_15_COMPILER = CC
+LISTING_4_15_LIBS = -lpthread
+LISTING_4_15_TYPE = EXECUTABLE
+
+# =============================================================================
+# ==========================CAPITULO 5=========================================
 
 
 
@@ -332,6 +441,40 @@ $(eval $(call make_listing_rule,3,8))
 $(eval $(call make_listing_rule,3,9))
 # Listing 3.10
 $(eval $(call make_listing_rule,3,10))
+
+# ===================================
+# CAPITULO 4
+# ===================================
+# Listing 4.1
+$(eval $(call make_listing_rule,4,1))
+# Listing 4.2
+$(eval $(call make_listing_rule,4,2))
+# Listing 4.3
+$(eval $(call make_listing_rule,4,3))
+# Listing 4.4
+$(eval $(call make_listing_rule,4,4))
+# Listing 4.5
+$(eval $(call make_listing_rule,4,5))
+# Listing 4.6
+$(eval $(call make_listing_rule,4,6))
+# Listing 4.7
+$(eval $(call make_listing_rule,4,7))
+# Listing 4.8
+$(eval $(call make_listing_rule,4,8))
+# Listing 4.9
+$(eval $(call make_listing_rule,4,9))
+# Listing 4.10
+$(eval $(call make_listing_rule,4,10))
+# Listing 4.11
+$(eval $(call make_listing_rule,4,11))
+# Listing 4.12
+$(eval $(call make_listing_rule,4,12))
+# Listing 4.13
+$(eval $(call make_listing_rule,4,13))
+# Listing 4.14
+$(eval $(call make_listing_rule,4,14))
+# listing 4.15
+$(eval $(call make_listing_rule,4,15))
 
 # =============================================================================
 
