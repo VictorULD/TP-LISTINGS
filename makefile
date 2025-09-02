@@ -255,7 +255,77 @@ LISTING_4_15_TYPE = EXECUTABLE
 # =============================================================================
 # ==========================CAPITULO 5=========================================
 
+# LISTING 5.1
+LISTING_5_1_SOURCES = $(SRC_DIR)/capitulo5/5.1/shm.c
+LISTING_5_1_TARGET = shm
+LISTING_5_1_COMPILER = CC
+LISTING_5_1_TYPE = EXECUTABLE
 
+# LISTING 5.2
+LISTING_5_2_SOURCES = $(SRC_DIR)/capitulo5/5.2/sem_all_deall.c
+LISTING_5_2_TARGET = sem_all_deall
+LISTING_5_2_COMPILER = CC
+LISTING_5_2_TYPE = EXECUTABLE
+
+# LISTING 5.3
+LISTING_5_3_SOURCES = $(SRC_DIR)/capitulo5/5.3/sem_init.c
+LISTING_5_3_TARGET = sem_init
+LISTING_5_3_COMPILER = CC
+LISTING_5_3_TYPE = EXECUTABLE
+
+# LISTING 5.4
+LISTING_5_4_SOURCES = $(SRC_DIR)/capitulo5/5.4/sem_pv.c
+LISTING_5_4_TARGET = sem_pv
+LISTING_5_4_COMPILER = CC
+LISTING_5_4_TYPE = EXECUTABLE
+
+# LISTING 5.5
+LISTING_5_5_SOURCES = $(SRC_DIR)/capitulo5/5.5/mmap-write.c
+LISTING_5_5_TARGET = mmap-write
+LISTING_5_5_COMPILER = CC
+LISTING_5_5_TYPE = EXECUTABLE
+
+# LISTING 5.6
+LISTING_5_6_SOURCES = $(SRC_DIR)/capitulo5/5.6/mmap-read.c
+LISTING_5_6_TARGET = mmap-read
+LISTING_5_6_COMPILER = CC
+LISTING_5_6_TYPE = EXECUTABLE
+
+# LISTING 5.7
+LISTING_5_7_SOURCES = $(SRC_DIR)/capitulo5/5.7/pipe.c
+LISTING_5_7_TARGET = pipe
+LISTING_5_7_COMPILER = CC
+LISTING_5_7_TYPE = EXECUTABLE
+
+# LISTING 5.8
+LISTING_5_8_SOURCES = $(SRC_DIR)/capitulo5/5.8/dup2.c
+LISTING_5_8_TARGET = dup2
+LISTING_5_8_COMPILER = CC
+LISTING_5_8_TYPE = EXECUTABLE
+
+# LISTING 5.9
+LISTING_5_9_SOURCES = $(SRC_DIR)/capitulo5/5.9/popen.c
+LISTING_5_9_TARGET = popen
+LISTING_5_9_COMPILER = CC
+LISTING_5_9_TYPE = EXECUTABLE
+
+# LISTING 5.10
+LISTING_5_10_SOURCES = $(SRC_DIR)/capitulo5/5.10/socket-server.c
+LISTING_5_10_TARGET = socket-server
+LISTING_5_10_COMPILER = CC
+LISTING_5_10_TYPE = EXECUTABLE
+
+# LISTING 5.11
+LISTING_5_11_SOURCES = $(SRC_DIR)/capitulo5/5.11/socket-client.c
+LISTING_5_11_TARGET = socket-client
+LISTING_5_11_COMPILER = CC
+LISTING_5_11_TYPE = EXECUTABLE
+
+# LISTING 5.12
+LISTING_5_12_SOURCES = $(SRC_DIR)/capitulo5/5.12/socket-inet.c
+LISTING_5_12_TARGET = socket-inet
+LISTING_5_12_COMPILER = CC
+LISTING_5_12_TYPE = EXECUTABLE
 
 # =============================================================================
 
@@ -266,7 +336,9 @@ ALL_TARGETS += listing-3.3 listing-3.4 listing-3.5 listing-3.6 listing-3.7
 ALL_TARGETS += listing-4.1 listing-4.2 listing-4.3 listing-4.4 listing-4.5
 ALL_TARGETS += listing-4.6 listing-4.7 listing-4.8 listing-4.9 listing-4.10
 ALL_TARGETS += listing-4.11 listing-4.12 listing-4.13 listing-4.14
-ALL_TARGETS += listing-4.15 listing-5.1
+ALL_TARGETS += listing-4.15 listing-5.1 listing-5.2 listing-5.3 listing-5.4
+ALL_TARGETS += listing-5.5 listing-5.6 listing-5.7 listing-5.8 listing-5.9
+ALL_TARGETS += listing-5.10 listing-5.11 listing-5.12
 
 # =============================================================================
 
@@ -475,6 +547,34 @@ $(eval $(call make_listing_rule,4,13))
 $(eval $(call make_listing_rule,4,14))
 # listing 4.15
 $(eval $(call make_listing_rule,4,15))
+
+# ===================================
+# CAPITULO 5
+# ===================================
+# Listing 5.1
+$(eval $(call make_listing_rule,5,1))
+# Listing 5.2
+$(eval $(call make_listing_rule,5,2))
+# Listing 5.3
+$(eval $(call make_listing_rule,5,3))
+# Listing 5.4
+$(eval $(call make_listing_rule,5,4))
+# Listing 5.5
+$(eval $(call make_listing_rule,5,5))
+# Listing 5.6
+$(eval $(call make_listing_rule,5,6))
+# Listing 5.7
+$(eval $(call make_listing_rule,5,7))
+# Listing 5.8
+$(eval $(call make_listing_rule,5,8))
+# Listing 5.9
+$(eval $(call make_listing_rule,5,9))
+# Listing 5.10
+$(eval $(call make_listing_rule,5,10))
+# Listing 5.11
+$(eval $(call make_listing_rule,5,11))
+# Listing 5.12
+$(eval $(call make_listing_rule,5,12))
 
 # =============================================================================
 
